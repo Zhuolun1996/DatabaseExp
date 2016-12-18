@@ -404,7 +404,7 @@ def updateOuterIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Outer_IP.can_change_cabinet_outer_ip', login_url='/login/',
+@permission_required('Cabinet_Outer_IP.can_delete_cabinet_outer_ip', login_url='/login/',
                      raise_exception='permission_denied')
 def deleteOuterIP(request, OuterIP):
     _Cabinet_Outer_IP = Cabinet_outer_IP.objects.get(Outer_IP_address=OuterIP)
