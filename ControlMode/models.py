@@ -75,7 +75,7 @@ class Equipments(models.Model):
     Model = models.CharField(max_length=50)
     Inner_IP_address = models.OneToOneField('Cabinet_inner_IP', on_delete=models.CASCADE, unique=True)
     Outer_IP_address = models.OneToOneField('Cabinet_outer_IP', on_delete=models.CASCADE, unique=True)
-    Intface_to_switch = models.CharField(max_length=20, choices=INTERFACE_TO_SWITCH_CHOICE, unique=True)
+    Intface_to_switch = models.CharField(max_length=20, choices=INTERFACE_TO_SWITCH_CHOICE)
     U_NUM = models.IntegerField()
     Cabinet_id = models.ForeignKey('Cabinet', on_delete=models.CASCADE)
     Bandwidth = models.CharField(max_length=50)
@@ -83,10 +83,6 @@ class Equipments(models.Model):
     Machine_password = models.CharField(max_length=50)
     Using_date = models.DateField()
 
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        if not Cabinet.objects.get(Cabinet_id=self.Cabinet_id).Cabinet_machine_total >= 15:
-            super(Equipments, self).save()
 
     def __str__(self):
         return self.PIN_code
@@ -123,7 +119,7 @@ def Cabinet_Outer_IP_Delete(sender, instance, **kwargs):
 def Equiments_Trigger_Cabinet_Created(sender, created, instance, **kwargs):
     new_Inner_IP_address = (str(instance.Inner_IP_address).split('/'))[1]
     new_Outer_IP_address = (str(instance.Outer_IP_address).split('/'))[1]
-    OneToOne_Inner_IP = Cabinet_inner_IP.objects.get(Inner_IP_address=new_Inner_IP_address)
+    OneToOne_Inner_IP = Cabinet_inner_IP.objects.get(Inner_IP_address=new_Inner_IP_address,Cabinet_id=instance.Cabinet_id)
     OneToOne_Outer_IP = Cabinet_outer_IP.objects.get(Outer_IP_address=new_Outer_IP_address)
     OneToOne_Inner_IP.Using_condition = 'inUsing'
     OneToOne_Outer_IP.Using_condition = 'inUsing'
@@ -140,7 +136,7 @@ def Equiments_Trigger_Cabinet_Created(sender, created, instance, **kwargs):
 def Equiments_trigger_Cabinet_Deleted(sender, instance, **kwargs):
     new_Inner_IP_address = (str(instance.Inner_IP_address).split('/'))[1]
     new_Outer_IP_address = (str(instance.Outer_IP_address).split('/'))[1]
-    OneToOne_Inner_IP = Cabinet_inner_IP.objects.get(Inner_IP_address=new_Inner_IP_address)
+    OneToOne_Inner_IP = Cabinet_inner_IP.objects.get(Inner_IP_address=new_Inner_IP_address,Cabinet_id=instance.Cabinet_id)
     OneToOne_Outer_IP = Cabinet_outer_IP.objects.get(Outer_IP_address=new_Outer_IP_address)
     OneToOne_Inner_IP.Using_condition = 'notUsing'
     OneToOne_Outer_IP.Using_condition = 'notUsing'

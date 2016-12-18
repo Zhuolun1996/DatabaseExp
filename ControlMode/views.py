@@ -87,7 +87,7 @@ def CabinetDetail(request, Room_name):
 
 
 @login_required(login_url='/login/')
-@permission_required('ComRoom.can_add_comroom', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.add_comroom', login_url='/login/', raise_exception='permission_denied')
 def addComRoom(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -109,7 +109,7 @@ def addComRoom(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet.can_add_cabinet', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.add_cabinet', login_url='/login/', raise_exception='permission_denied')
 def addCabinet(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -132,7 +132,7 @@ def addCabinet(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet.can_delete_cabinet', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.delete_cabinet', login_url='/login/', raise_exception='permission_denied')
 def deleteCabinet(request, Cabinet_id):
     _Cabinet = Cabinet.objects.get(Cabinet_id=str(Cabinet_id))
     _Cabinet_Room_address = str(_Cabinet.Room_address)
@@ -141,7 +141,7 @@ def deleteCabinet(request, Cabinet_id):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet.can_change_cabinet', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.change_cabinet', login_url='/login/', raise_exception='permission_denied')
 def changeCabinet(request, Cabinet_id):
     log_status = request.user.is_authenticated()
     _Cabinet = Cabinet.objects.get(Cabinet_id=str(Cabinet_id))
@@ -151,7 +151,7 @@ def changeCabinet(request, Cabinet_id):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet.can_change_cabinet', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.change_cabinet', login_url='/login/', raise_exception='permission_denied')
 def updateCabinet(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -182,7 +182,7 @@ def Equipmentsdetail(request, Cabinet_id):
 
 
 @login_required(login_url='/login/')
-@permission_required('Equipments.can_add_equipments', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.add_equipments', login_url='/login/', raise_exception='permission_denied')
 def addEquipment(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -218,7 +218,7 @@ def addEquipment(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Equipments.can_change_equipments', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.change_equipments', login_url='/login/', raise_exception='permission_denied')
 def changeEquipment(request, PIN_code):
     log_status = request.user.is_authenticated()
     _Equipment = Equipments.objects.get(PIN_code=str(PIN_code))
@@ -228,7 +228,7 @@ def changeEquipment(request, PIN_code):
 
 
 @login_required(login_url='/login/')
-@permission_required('Equipments.can_change_equipments', login_url='/login/', raise_exception='permission_denied')
+@permission_required('ControlMode.change_equipments', login_url='/login/', raise_exception='permission_denied')
 def updateEquipment(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -253,8 +253,8 @@ def updateEquipment(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Equipments.can_delete_equipments', login_url='/login/', raise_exception='permission_denied')
-def deleteCabinet(request, PIN_code):
+@permission_required('ControlMode.delete_equipments', login_url='/login/', raise_exception='permission_denied')
+def deleteEquipment(request, PIN_code):
     _Equipment = Equipments.objects.get(PIN_code=str(PIN_code))
     _Cabinet = str(_Equipment.Cabinet_id)
     _Equipment.delete()
@@ -277,7 +277,7 @@ def InnerIPDetail(request, Cabinet_id):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Inner_IP.can_add_cabinet_inner_ip', login_url='/login/',
+@permission_required('ControlMode.add_cabinet_inner_ip', login_url='/login/',
                      raise_exception='permission_denied')
 def addInnerIP(request):
     log_status = request.user.is_authenticated()
@@ -299,7 +299,7 @@ def addInnerIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Inner_IP.can_change_cabinet_inner_ip')
+@permission_required('ControlMode.change_cabinet_inner_ip',login_url='/login/',raise_exception='permission_denied')
 def changeInnerIP(request, Cabinet_id, InnerIP):
     log_status = request.user.is_authenticated()
     _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=str(InnerIP),Cabinet_id=str(Cabinet_id))
@@ -309,7 +309,7 @@ def changeInnerIP(request, Cabinet_id, InnerIP):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Inner_IP.can_change_cabinet_inner_ip')
+@permission_required('ControlMode.change_cabinet_inner_ip',login_url='/login/',raise_exception='permission_denied')
 def updateInnerIP(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -328,7 +328,7 @@ def updateInnerIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Inner_IP.can_delete_cabinet_inner_ip')
+@permission_required('ControlMode.delete_cabinet_inner_ip',login_url='/login/',raise_exception='permission_denied')
 def deleteInnerIP(request, InnerIP):
     _Cabinet_Inner_IP = Cabinet_inner_IP.objects.get(Inner_IP_address=InnerIP)
     _Cabinet = str(_Cabinet_Inner_IP.Cabinet_id)
@@ -352,7 +352,7 @@ def OuterIPDetail(request, Cabinet_id):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Outer_IP.can_add_cabinet_outer_ip', login_url='/login/',
+@permission_required('ControlMode.add_cabinet_outer_ip', login_url='/login/',
                      raise_exception='permission_denied')
 def addOuterIP(request):
     log_status = request.user.is_authenticated()
@@ -374,7 +374,7 @@ def addOuterIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Outer_IP.can_change_cabinet_outer_ip', login_url='/login/',
+@permission_required('ControlMode.change_cabinet_outer_ip', login_url='/login/',
                      raise_exception='permission_denied')
 def changeOuterIP(request, OuterIP):
     log_status = request.user.is_authenticated()
@@ -384,7 +384,7 @@ def changeOuterIP(request, OuterIP):
                   {'OuterIPForm': _OuterIPForm, 'OuterIP': _OuterIP, 'log_status': log_status, 'From': 'Outer'})
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Outer_IP.can_change_cabinet_outer_ip', login_url='/login/',
+@permission_required('ControlMode.change_cabinet_outer_ip', login_url='/login/',
                      raise_exception='permission_denied')
 def updateOuterIP(request):
     log_status = request.user.is_authenticated()
@@ -404,7 +404,7 @@ def updateOuterIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('Cabinet_Outer_IP.can_delete_cabinet_outer_ip', login_url='/login/',
+@permission_required('ControlMode.delete_cabinet_outer_ip', login_url='/login/',
                      raise_exception='permission_denied')
 def deleteOuterIP(request, OuterIP):
     _Cabinet_Outer_IP = Cabinet_outer_IP.objects.get(Outer_IP_address=OuterIP)
