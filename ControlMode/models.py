@@ -113,9 +113,10 @@ def Cabinet_Outer_IP_Change(sender, instance, **kwargs):
 
 @receiver(post_delete, sender=Cabinet_outer_IP)
 def Cabinet_Outer_IP_Delete(sender, instance, **kwargs):
-    OneToOne_Cabinet = Cabinet.objects.get(Cabinet_id=instance.Cabinet_id)
-    OneToOne_Cabinet.Rest_IP -= 1
-    OneToOne_Cabinet.save()
+    if instance.Using_condition == 'notUsing':
+        OneToOne_Cabinet = Cabinet.objects.get(Cabinet_id=instance.Cabinet_id)
+        OneToOne_Cabinet.Rest_IP -= 1
+        OneToOne_Cabinet.save()
 
 
 @receiver(post_save, sender=Equipments)
