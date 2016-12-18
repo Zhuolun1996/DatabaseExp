@@ -95,7 +95,19 @@ class Equipments(models.Model):
 @receiver(pre_save, sender=Cabinet)
 def Cabinet_set_total_machine(sender, instance, **kwargs):
     instance.Cabinet_machine_total = Equipments.objects.filter(Cabinet_id=instance.Cabinet_id).count()
-    instance.Rest_IP = Cabinet_outer_IP.objects.filter(Using_condition='notUsing').count()
+    instance.Rest_IP = Cabinet_outer_IP.objects.filter(Using_condition='notUsing',Cabinet_id=instance.Cabinet_id).count()
+
+
+@receiver(post_save, sender=Cabinet_outer_IP)
+def Cabinet_Outer_IP_Change(sender, instance, **kwargs):
+    if instance.Using_condition == 'notUsing':
+        OneToOne_Cabinet = Cabinet.objects.get(Cabinet_id=instance.Cabinet_id)
+        OneToOne_Cabinet.Rest_IP += 1
+        OneToOne_Cabinet.save()
+    if instance.Using_condition == 'inUsing':
+        OneToOne_Cabinet = Cabinet.objects.get(Cabinet_id=instance.Cabinet_id)
+        OneToOne_Cabinet.Rest_IP -= 1
+        OneToOne_Cabinet.save()
 
 
 @receiver(post_save, sender=Equipments)
