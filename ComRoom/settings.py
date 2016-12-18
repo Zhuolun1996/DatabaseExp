@@ -25,7 +25,7 @@ SECRET_KEY = 'lncpkahiv)(=0za872my@x2$c=k9p%z_z&j5a+%=wyb1q(8i#!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['database.linkzzll.com','127.0.0.1']
 
 
 # Application definition
