@@ -32,8 +32,12 @@ class Cabinet(models.Model):
 class Cabinet_inner_IP(models.Model):
     USING_CONDITION_CHOICES = (('inUsing', 'the IP is being using'), ('notUsing', 'the IP is not being using'))
     Cabinet_id = models.ForeignKey('Cabinet', on_delete=models.CASCADE)
-    Inner_IP_address = models.CharField(max_length=20, primary_key=True)
+    Inner_IP_address = models.CharField(max_length=20)
     Using_condition = models.CharField(max_length=10, choices=USING_CONDITION_CHOICES)
+
+    class Meta:
+        db_table = 'Global_IP_address'
+        unique_together = (("Cabinet_id", "Inner_IP_address"))
 
     def __str__(self):
         return str(self.Cabinet_id) + '/' + self.Inner_IP_address
@@ -44,6 +48,9 @@ class Cabinet_outer_IP(models.Model):
     Cabinet_id = models.ForeignKey('Cabinet', on_delete=models.CASCADE)
     Outer_IP_address = models.CharField(max_length=20, primary_key=True)
     Using_condition = models.CharField(max_length=10, choices=USING_CONDITION_CHOICES)
+
+    class Meta:
+        db_table = 'Local_IP_address'
 
     def __str__(self):
         return str(self.Cabinet_id) + '/' + self.Outer_IP_address
