@@ -300,9 +300,9 @@ def addInnerIP(request):
 
 @login_required(login_url='/login/')
 @permission_required('Cabinet_Inner_IP.can_change_cabinet_inner_ip')
-def changeInnerIP(request, InnerIP):
+def changeInnerIP(request, Cabinet_id, InnerIP):
     log_status = request.user.is_authenticated()
-    _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=str(InnerIP))
+    _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=str(InnerIP),Cabinet_id=str(Cabinet_id))
     _InnerIPForm = InnerIPForm()
     return render(request, 'IPModify.html',
                   {'InnerIPForm': _InnerIPForm, 'InnerIP': _InnerIP, 'log_status': log_status, 'From': 'Inner'})
@@ -318,7 +318,7 @@ def updateInnerIP(request):
         _Cabinet_id = request.POST.get('Cabinet_id')
         _Inner_IP_address = request.POST.get('Inner_IP_address')
         _Using_condition = request.POST.get('Using_condition')
-        _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=_Inner_IP_address)
+        _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=_Inner_IP_address,Cabinet_id=_Cabinet_id)
         _Cabinet = Cabinet.objects.get(Cabinet_id=_Cabinet_id)
         _InnerIP.Cabinet_id = _Cabinet
         _InnerIP.Inner_IP_address = _Inner_IP_address

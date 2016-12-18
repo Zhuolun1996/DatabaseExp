@@ -58,7 +58,7 @@
                                    href="javascript:;">IP管理<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                                    <li><a href="{% url "changeinnerip" InnerIP=Inner_IP.Inner_IP_address %}">修改</a></li>
+                                    <li><a href="{% url "changeinnerip" Cabinet_id=Inner_IP.Cabinet_id InnerIP=Inner_IP.Inner_IP_address %}">修改</a></li>
                                     <li><a href="{% url "deleteinnerip" InnerIP=Inner_IP.Inner_IP_address %}">删除</a></li>
                                 </ul>
                             </div>
@@ -74,7 +74,7 @@
                                    href="javascript:;">IP管理<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                                    <li><a href="{% url "changeinnerip" InnerIP=Inner_IP.Inner_IP_address %}">修改</a></li>
+                                    <li><a href="{% url "changeinnerip" Cabinet_id=Inner_IP.Cabinet_id InnerIP=Inner_IP.Inner_IP_address %}">修改</a></li>
                                     <li><a href="{% url "deleteinnerip" InnerIP=Inner_IP.Inner_IP_address %}">删除</a></li>
                                 </ul>
                             </div>
