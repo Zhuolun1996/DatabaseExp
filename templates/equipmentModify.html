@@ -7,7 +7,7 @@
     <div class="col-md-8 col-md-offset-2">
         <form action="/updateEquipment/" method="post">
             {% csrf_token %}
-            {% bootstrap_field EquipmentForm.PIN_code set_readonly="True" layout="inline" %}
+            {% bootstrap_field EquipmentForm.PIN_code set_readonly="readonly" layout="inline" %}
             {% bootstrap_field EquipmentForm.Model layout="inline" %}
             {% bootstrap_field EquipmentForm.Inner_IP_address layout="inline" %}
             {% bootstrap_field EquipmentForm.Outer_IP_address layout="inline" %}

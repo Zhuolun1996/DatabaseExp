@@ -7,8 +7,8 @@
     <div class="col-md-8 col-md-offset-2">
         <form action="/updateCabinet/" method="post">
             {% csrf_token %}
-            {% bootstrap_field CabinetForm.Cabinet_id set_readonly="True" layout="inline" %}
-            {% bootstrap_field CabinetForm.Room_address set_readonly="True" layout="inline" %}
+            {% bootstrap_field CabinetForm.Cabinet_id set_readonly="readonly" layout="inline" %}
+            {% bootstrap_field CabinetForm.Room_address set_readonly="readonly" layout="inline" %}
             {% bootstrap_field CabinetForm.Cabinet_floor layout="inline" %}
             {% bootstrap_field CabinetForm.Cabinet_position layout="inline" %}
             {% bootstrap_field CabinetForm.Bandwidth layout="inline" %}
