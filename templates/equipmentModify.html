@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+     <div class="page-header">
+        <h1>设备修改</h1>
+     </div>
+    <div class="col-md-8 col-md-offset-2">
+        <form action="/updateEquipment/" method="post">
+            {% csrf_token %}
+            {% bootstrap_field EquipmentForm.PIN_code set_readonly="True" layout="inline" %}
+            {% bootstrap_field EquipmentForm.Model layout="inline" %}
+            {% bootstrap_field EquipmentForm.Inner_IP_address layout="inline" %}
+            {% bootstrap_field EquipmentForm.Outer_IP_address layout="inline" %}
+            {% bootstrap_field EquipmentForm.Intface_to_switch layout="inline" %}
+            {% bootstrap_field EquipmentForm.U_NUM layout="inline" %}
+            {% bootstrap_field EquipmentForm.Cabinet_id set_readonly="True" layout="inline" %}
+            {% bootstrap_field EquipmentForm.Bandwidth layout="inline" %}
+            {% bootstrap_field EquipmentForm.Company_name layout="inline" %}
+            {% bootstrap_field EquipmentForm.Machine_password layout="inline" %}
+            {% bootstrap_field EquipmentForm.Using_date layout="inline" %}
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var PIN_code = "{{ Equipment.PIN_code }}";
+        var Model = "{{ Equipment.Model }}";
+        var Inner_IP_address = "{{ Equipment.Inner_IP_address }}";
+        var Outer_IP_address = "{{ Equipment.Outer_IP_address }}";
+        var Intface_to_switch = "{{ Equipment.Intface_to_switch }}";
+        var U_NUM="{{ Equipment.U_NUM }}";
+        var Cabinet_id="{{ Equipment.Cabinet_id }}";
+        var Bandwidth="{{ Equipment.Bandwidth }}";
+        var Company_name="{{ Equipment.Company_name }}";
+        var Machine_password="{{ Equipment.Machine_password }}";
+        var Using_date="{{ Equipment.Using_date }}";
+        $("#id_PIN_code").val(PIN_code);
+        $("#id_Model").val(Model);
+        $("#id_Inner_IP_address").val(Inner_IP_address);
+        $("#id_Outer_IP_address").val(Outer_IP_address);
+        $("#id_Intface_to_switch").val(Intface_to_switch);
+        $("#id_U_NUM").val(U_NUM);
+        $("#id_Cabinet_id").val(Cabinet_id);
+        $("#id_Bandwidth").val(Bandwidth);
+        $("#id_Company_name").val(Company_name);
+        $("#id_Machine_password").val(Machine_password);
+        $("#id_Using_date").val(Using_date);
+    </script>
+{% endblock %}

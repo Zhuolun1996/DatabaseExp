@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
-
 from django.dispatch import receiver
 
 
@@ -11,7 +10,7 @@ from django.dispatch import receiver
 class ComRoom(models.Model):
     Room_name = models.CharField(max_length=100, primary_key=True)
     Room_address = models.CharField(max_length=100)
-    IPS = models.CharField(max_length=100)
+    IPS = models.CharField(max_length=50)
 
     def __str__(self):
         return self.Room_name

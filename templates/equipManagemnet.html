@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+    <div class="page-header">
+        <h1>设备管理
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"
+                    style="float: right;">
+                新增设备
+            </button>
+        </h1>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">新建机房</h4>
+                    </div>
+                    <form action="/addEquipment/" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <fieldset>
+                                    {% csrf_token %}
+                                    {% bootstrap_form EquipmentForm layout="inline" %}
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if Invalid_Input %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span></button>
+            <strong>ERROR!</strong> Invalid Form Maybe The Same Primary Key
+        </div>
+    {% endif %}
+    {% for Equipment in Equipments %}
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="/static/image/Equipment.png" alt="{{ Equipment.PIN_code }}">
+                <div class="caption">
+                    <h3 class="text-center">{{ Equipment.PIN_code }}</h3>
+                    <p class="text-center">型号：{{ Equipment.Model }}</p>
+                    <p class="text-center">内网IP：{{ Equipment.Inner_IP_address }}</p>
+                    <p class="text-center">外网IP：{{ Equipment.Outer_IP_address }}</p>
+                    <p class="text-center">端口：{{ Equipment.Intface_to_switch }}</p>
+                    <p class="text-center">机柜：{{ Equipment.Cabinet_id }}</p>
+                    <p class="text-center">带宽：{{ Equipment.Bandwidth }}</p>
+                    <p class="text-center">公司：{{ Equipment.Company_name }}</p>
+                    <p class="text-center">启用日期：{{ Equipment.Using_date }}</p>
+                    <div class="dropdown text-center">
+                        <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
+                           href="javascript:;"> 设备管理 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                            <li class="dropdown-submenu">
+                                <a href="javascript:;">设备信息</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url "changeequipment" PIN_code=Equipment.PIN_code %}">修改</a></li>
+                                    <li><a href="{% url "deleteequipment" PIN_code=Equipment.PIN_code %}">删除</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

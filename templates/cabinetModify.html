@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+    <div class="page-header">
+        <h1>机柜修改</h1>
+     </div>
+    <div class="col-md-8 col-md-offset-2">
+        <form action="/updateCabinet/" method="post">
+            {% csrf_token %}
+            {% bootstrap_field CabinetForm.Cabinet_id set_readonly="True" layout="inline" %}
+            {% bootstrap_field CabinetForm.Room_address set_readonly="True" layout="inline" %}
+            {% bootstrap_field CabinetForm.Cabinet_floor layout="inline" %}
+            {% bootstrap_field CabinetForm.Cabinet_position layout="inline" %}
+            {% bootstrap_field CabinetForm.Bandwidth layout="inline" %}
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var Cabinet_id = "{{ Cabinet.Cabinet_id }}";
+        var Room_address = "{{ Cabinet.Room_address }}";
+        var Cabinet_floor = "{{ Cabinet.Cabinet_floor }}";
+        var Cabinet_position = "{{ Cabinet.Cabinet_position }}";
+        var Bandwidth = "{{ Cabinet.Bandwidth }}";
+        $("#id_Cabinet_id").val(Cabinet_id);
+        $("#id_Room_address").val(Room_address);
+        $("#id_Cabinet_floor").val(Cabinet_floor);
+        $("#id_Cabinet_position").val(Cabinet_position);
+        $("#id_Bandwidth").val(Bandwidth);
+    </script>
+{% endblock %}

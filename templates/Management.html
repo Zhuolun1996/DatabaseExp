@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+    <div class="page-header">
+        <h1>机房管理
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"
+                    style="float: right;">
+                新增机房
+            </button>
+        </h1>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">新建机房</h4>
+                    </div>
+                    <form action="/addRoom/" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <fieldset>
+                                    {% csrf_token %}
+                                    {% bootstrap_form ComRoomForm layout="inline" %}
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% if Invalid_Input %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span></button>
+            <strong>ERROR!</strong> Invalid Form Maybe The Same Primary Key
+        </div>
+    {% endif %}
+    {% for ComRoom in ComRooms %}
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="/static/image/ComRoom.png" alt="{{ ComRoom.Room_name }}">
+                <div class="caption">
+                    <h3 class="text-center">{{ ComRoom.Room_name }}</h3>
+                    <p class="text-center">地址：{{ ComRoom.Room_address }}</p>
+                    <p class="text-center"><a href="{% url "cabinet" Room_name=ComRoom.Room_name %}"
+                                              class="btn btn-primary" role="button">管理</a></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+{% endblock %}

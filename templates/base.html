@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络资源设备管理系统</title>
+    <!--<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">-->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <link href=" /static/css/docs.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/image/favicon.ico">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top bs-docs-nav" role="navigation" id="top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:;">DMS</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">主页</a></li>
+                <li><a href="/management/">资源管理</a></li>
+                {% if log_status %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">资源浏览 <span class="caret"></span></a>
+                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                            <li><a href="/management/">机位管理</a></li>
+                            <li><a href="/networkmanagement/">网络资源管理</a></li>
+{#                            <li class="dropdown-submenu">#}
+{#                                <a href="javascript:;">网络资源管理</a>#}
+{#                                <ul class="dropdown-menu">#}
+{#                                    <li><a href="">内网IP管理</a></li>#}
+{#                                    <li><a href="">外网IP管理</a></li>#}
+{#                                </ul>#}
+{#                            </li>#}
+                            <li><a href="/management/">客户管理</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+            <form class="navbar-form navbar-left" role="search" action="" method="get">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                {% if not log_status %}
+                    <li><a href="/login/">登录</a></li>
+                {% else %}
+                    <li><a href="/logout/">注销</a></li>
+                    <li><a href="/regist/">新用户</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">网络资源设备管理系统</h1>
+        <p class="text-center">Network Resources Management System</p>
+    </div>
+</div>
+
+<div class="container bs-docs-container" id="DMSContent">
+    <div class="row">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<footer class="bs-docs-footer" role="contentinfo">
+    <div class="container">
+        <p>Designed by group</p>
+        <ul class="bs-docs-footer-links muted">
+            <li><a href="#">About me</a></li>
+            <li><a href="https://github.com/maho-1996/DatabaseExp">GitHub</a></li>
+        </ul>
+    </div>
+</footer>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
