@@ -12,8 +12,8 @@
     <div class="col-md-8 col-md-offset-2">
         <form action="/updateInnerIP/" method="post">
             {% csrf_token %}
-            {% bootstrap_field InnerIPForm.Cabinet_id set_readonly="readonly" layout="inline" %}
-            {% bootstrap_field InnerIPForm.Inner_IP_address set_readonly="readonly" layout="inline" %}
+            {% bootstrap_field InnerIPForm.Cabinet_id set_readonly="True" layout="inline" %}
+            {% bootstrap_field InnerIPForm.Inner_IP_address set_readonly="True" layout="inline" %}
             {% bootstrap_field InnerIPForm.Using_condition layout="inline" %}
             <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
@@ -30,8 +30,8 @@
          <div class="col-md-8 col-md-offset-2">
         <form action="/updateOuterIP/" method="post">
             {% csrf_token %}
-            {% bootstrap_field OuterIPForm.Cabinet_id set_readonly="readonly" layout="inline" %}
-            {% bootstrap_field OuterIPForm.Outer_IP_address set_readonly="readonly" layout="inline" %}
+            {% bootstrap_field OuterIPForm.Cabinet_id set_readonly="True" layout="inline" %}
+            {% bootstrap_field OuterIPForm.Outer_IP_address set_readonly="True" layout="inline" %}
             {% bootstrap_field OuterIPForm.Using_condition layout="inline" %}
             <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
