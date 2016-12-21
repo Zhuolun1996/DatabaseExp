@@ -176,9 +176,10 @@ def Equipmentsdetail(request, Cabinet_id):
         _Equipment = Equipments.objects.filter(Cabinet_id=str(Cabinet_id))
     except ComRoom.DoesNotExist:
         raise Http404
+    Room_name = Cabinet.objects.get(Cabinet_id=Cabinet_id).Room_address
     return render(request, 'equipManagemnet.html',
                   {'log_status': log_status, 'Equipments': _Equipment, 'EquipmentForm': _EquipmentForm,
-                   'Invalid_Input': Invalid_Input})
+                   'Invalid_Input': Invalid_Input, 'Room_name': Room_name})
 
 
 @login_required(login_url='/login/')
@@ -268,12 +269,12 @@ def InnerIPDetail(request, Cabinet_id):
     Invalid_Input = request.GET.get('Invalid_Input')
     try:
         _Inner_IP = Cabinet_inner_IP.objects.filter(Cabinet_id=str(Cabinet_id))
-        print(_Inner_IP)
     except ComRoom.DoesNotExist:
         raise Http404
+    Room_name = Cabinet.objects.get(Cabinet_id=Cabinet_id).Room_address
     return render(request, 'InnerIPManagement.html',
                   {'log_status': log_status, 'Cabinet_Inner_IP': _Inner_IP, 'InnerIPForm': _Cabinet_Inner_IP,
-                   'Invalid_Input': Invalid_Input})
+                   'Invalid_Input': Invalid_Input, 'Room_name': Room_name})
 
 
 @login_required(login_url='/login/')
@@ -299,17 +300,17 @@ def addInnerIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('ControlMode.change_cabinet_inner_ip',login_url='/login/',raise_exception='permission_denied')
+@permission_required('ControlMode.change_cabinet_inner_ip', login_url='/login/', raise_exception='permission_denied')
 def changeInnerIP(request, Cabinet_id, InnerIP):
     log_status = request.user.is_authenticated()
-    _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=str(InnerIP),Cabinet_id=str(Cabinet_id))
+    _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=str(InnerIP), Cabinet_id=str(Cabinet_id))
     _InnerIPForm = InnerIPForm()
     return render(request, 'IPModify.html',
                   {'InnerIPForm': _InnerIPForm, 'InnerIP': _InnerIP, 'log_status': log_status, 'From': 'Inner'})
 
 
 @login_required(login_url='/login/')
-@permission_required('ControlMode.change_cabinet_inner_ip',login_url='/login/',raise_exception='permission_denied')
+@permission_required('ControlMode.change_cabinet_inner_ip', login_url='/login/', raise_exception='permission_denied')
 def updateInnerIP(request):
     log_status = request.user.is_authenticated()
     if request.method == 'GET':
@@ -318,7 +319,7 @@ def updateInnerIP(request):
         _Cabinet_id = request.POST.get('Cabinet_id')
         _Inner_IP_address = request.POST.get('Inner_IP_address')
         _Using_condition = request.POST.get('Using_condition')
-        _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=_Inner_IP_address,Cabinet_id=_Cabinet_id)
+        _InnerIP = Cabinet_inner_IP.objects.get(Inner_IP_address=_Inner_IP_address, Cabinet_id=_Cabinet_id)
         _Cabinet = Cabinet.objects.get(Cabinet_id=_Cabinet_id)
         _InnerIP.Cabinet_id = _Cabinet
         _InnerIP.Inner_IP_address = _Inner_IP_address
@@ -328,7 +329,7 @@ def updateInnerIP(request):
 
 
 @login_required(login_url='/login/')
-@permission_required('ControlMode.delete_cabinet_inner_ip',login_url='/login/',raise_exception='permission_denied')
+@permission_required('ControlMode.delete_cabinet_inner_ip', login_url='/login/', raise_exception='permission_denied')
 def deleteInnerIP(request, InnerIP):
     _Cabinet_Inner_IP = Cabinet_inner_IP.objects.get(Inner_IP_address=InnerIP)
     _Cabinet = str(_Cabinet_Inner_IP.Cabinet_id)
@@ -346,9 +347,10 @@ def OuterIPDetail(request, Cabinet_id):
         print(_OuterIP)
     except ComRoom.DoesNotExist:
         raise Http404
+    Room_name = Cabinet.objects.get(Cabinet_id=Cabinet_id).Room_address
     return render(request, 'OuterIPManagement.html',
                   {'log_status': log_status, 'Cabinet_Outer_IP': _OuterIP, 'OuterIPForm': _Cabinet_Outer_IP,
-                   'Invalid_Input': Invalid_Input})
+                   'Invalid_Input': Invalid_Input, 'Room_name': Room_name})
 
 
 @login_required(login_url='/login/')
@@ -382,6 +384,7 @@ def changeOuterIP(request, OuterIP):
     _OuterIPForm = OuterIPForm()
     return render(request, 'IPModify.html',
                   {'OuterIPForm': _OuterIPForm, 'OuterIP': _OuterIP, 'log_status': log_status, 'From': 'Outer'})
+
 
 @login_required(login_url='/login/')
 @permission_required('ControlMode.change_cabinet_outer_ip', login_url='/login/',

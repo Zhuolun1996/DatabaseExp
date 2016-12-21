@@ -2,6 +2,7 @@
 {% load bootstrap3 %}
 {% block content %}
     <div class="page-header">
+
         <h1>设备管理
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createCabinet"
                     style="float: right;">
@@ -40,6 +41,10 @@
         </div>
 
     </div>
+    <ol class="breadcrumb">
+        <li><a href="/management/">机房管理</a></li>
+        <li class="active">机位管理</li>
+    </ol>
     {% if Invalid_Input %}
         <div class="alert alert-warning alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>

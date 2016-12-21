@@ -33,30 +33,24 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">主页</a></li>
                 <li><a href="/management/">资源管理</a></li>
-                {% if log_status %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">资源浏览 <span class="caret"></span></a>
-                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                            <li><a href="/management/">机位管理</a></li>
-                            <li><a href="/management/">网络资源管理</a></li>
-{#                            <li class="dropdown-submenu">#}
-{#                                <a href="javascript:;">网络资源管理</a>#}
-{#                                <ul class="dropdown-menu">#}
-{#                                    <li><a href="">内网IP管理</a></li>#}
-{#                                    <li><a href="">外网IP管理</a></li>#}
-{#                                </ul>#}
-{#                            </li>#}
-                            <li><a href="/management/">客户管理</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
+                {#                {% if log_status %}#}
+                {#                    <li class="dropdown">#}
+                {#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">资源浏览 <span class="caret"></span></a>#}
+                {#                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">#}
+                {#                            <li><a href="/management/">机位管理</a></li>#}
+                {#                            <li><a href="/management/">网络资源管理</a></li>#}
+                {#                            <li class="dropdown-submenu">#}
+                {#                                <a href="javascript:;">网络资源管理</a>#}
+                {#                                <ul class="dropdown-menu">#}
+                {#                                    <li><a href="">内网IP管理</a></li>#}
+                {#                                    <li><a href="">外网IP管理</a></li>#}
+                {#                                </ul>#}
+                {#                            </li>#}
+                {#                            <li><a href="/management/">客户管理</a></li>#}
+                {#                        </ul>#}
+                {#                    </li>#}
+                {#                {% endif %}#}
             </ul>
-            <form class="navbar-form navbar-left" role="search" action="" method="get">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-            </form>
             <ul class="nav navbar-nav navbar-right">
                 {% if not log_status %}
                     <li><a href="/login/">登录</a></li>
